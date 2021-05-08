@@ -41,7 +41,7 @@ function LoginPage(props) {
               В amoCRM автоматически попадают все запросы по E-mail, Телефону, c Форм на сайте,
               через Чаты и Мессенджеры.
             </p>
-            <Link to='/signin' className='login-page__button'>
+            <Link to='/signup' className='login-page__button'>
               ПОПРОБУЙТЕ БЕСПЛАТНО
             </Link>
           </div>
