@@ -14,6 +14,8 @@ import google from '../../assets/google.svg';
 import CloseIcon from '@material-ui/icons/Close';
 
 import app from '../../firebase';
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider';
 const useStyles = makeStyles({
   root: {
     margin: '200px auto 0px auto',
@@ -45,6 +47,7 @@ function Auth(props) {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
+      //Отправка запрос на firebase для подтверждения аккаунта
       await app.auth().signInWithEmailAndPassword(email.value, password.value);
       alert('УСПЕХ!!!!');
     } catch (error) {

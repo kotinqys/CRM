@@ -13,7 +13,6 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider';
-
 import app from '../../firebase';
 
 const useStyles = makeStyles({
@@ -45,6 +44,7 @@ function SignUp(props) {
     const { email, password, correctPassword } = event.target.elements;
     if (password.value === correctPassword.value) {
       try {
+        //Отправка запроса в firebase для создание нового пользователя
         await app.auth().createUserWithEmailAndPassword(email.value, password.value);
         alert('Вы успешно зарегестрировались!!!');
       } catch (error) {
