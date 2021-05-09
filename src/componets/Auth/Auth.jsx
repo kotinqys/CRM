@@ -13,9 +13,6 @@ import {
 import google from '../../assets/google.svg';
 import CloseIcon from '@material-ui/icons/Close';
 
-import app from '../../firebase';
-import { useContext } from 'react';
-import { AuthContext } from '../../AuthProvider';
 const useStyles = makeStyles({
   root: {
     margin: '200px auto 0px auto',
@@ -41,20 +38,8 @@ const useStyles = makeStyles({
   },
 });
 
-function Auth(props) {
+function Auth({ onSubmit, onSubmitWithGoogle }) {
   const classes = useStyles();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { email, password } = event.target.elements;
-    try {
-      //Отправка запрос на firebase для подтверждения аккаунта
-      await app.auth().signInWithEmailAndPassword(email.value, password.value);
-      alert('УСПЕХ!!!!');
-    } catch (error) {
-      alert(error);
-    }
-  };
-
   return (
     <>
       <Card className={classes.root}>
@@ -63,14 +48,14 @@ function Auth(props) {
             <Typography className={classes.title} color='initial' variant='h5'>
               Авторизация
             </Typography>
-            <Link to='/'>
+            <Link to='/show'>
               <CloseIcon />
             </Link>
           </Box>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmit}>
             <TextField
               name='email'
-              id='standard-basic'
+              id='email'
               label='Почта'
               style={{ margin: '15px 8px' }}
               placeholder='example@crm.com'
@@ -82,7 +67,7 @@ function Auth(props) {
             />
             <TextField
               name='password'
-              id='standard-basic'
+              id='password'
               label='Пароль'
               type='password'
               style={{ margin: '15px 8px' }}
@@ -107,7 +92,14 @@ function Auth(props) {
       </Card>
       <Card className={classes.google}>
         <CardContent
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
+          onClick={onSubmitWithGoogle}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+            cursor: 'pointer',
+          }}>
           Вход с помощью <img src={google} alt='' />
         </CardContent>
       </Card>

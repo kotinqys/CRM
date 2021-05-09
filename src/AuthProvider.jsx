@@ -1,4 +1,3 @@
-import { current } from 'immer';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import app from './firebase';
@@ -13,8 +12,9 @@ function AuthProvider({ children }) {
     //Полсе отрисовки  приложения проверка на наличий профайла в cookie
     //Если пользователь найден то его добавить в state
     app.auth().onAuthStateChanged(setCurrentUser);
+    // экземпляр объекта поставщика Google
     dispatch(setProfile(currentUser));
-  }, []);
+  }, [currentUser]);
   return <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>;
 }
 

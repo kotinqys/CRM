@@ -9,6 +9,7 @@ const profile = (state = initialState, action) => {
         switch (action.type) {
             case 'SET_PROFILE':
                 draft.profile = action.profile
+                break
             default:
                 return state
     }

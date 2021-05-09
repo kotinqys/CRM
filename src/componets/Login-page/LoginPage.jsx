@@ -10,7 +10,7 @@ function LoginPage(props) {
         <div className='login-page__header'>
           <div className='login-page__leftside'>
             <div className='login-page__logo'>
-              <Link to='/'>
+              <Link to='/show'>
                 <img src={logo} alt='' />
               </Link>
             </div>

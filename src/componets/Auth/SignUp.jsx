@@ -1,3 +1,7 @@
+import React from 'react';
+
+import { Link } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -8,12 +12,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-
-import React from 'react';
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../AuthProvider';
-import app from '../../firebase';
 
 const useStyles = makeStyles({
   root: {
@@ -36,24 +34,8 @@ const useStyles = makeStyles({
   },
 });
 
-function SignUp(props) {
+function SignUp({ onSubmit }) {
   const classes = useStyles();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { email, password, correctPassword } = event.target.elements;
-    if (password.value === correctPassword.value) {
-      try {
-        //Отправка запроса в firebase для создание нового пользователя
-        await app.auth().createUserWithEmailAndPassword(email.value, password.value);
-        alert('Вы успешно зарегестрировались!!!');
-      } catch (error) {
-        alert(error);
-      }
-    } else {
-      alert('Пароль не подтвержден!');
-    }
-  };
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -61,17 +43,28 @@ function SignUp(props) {
           <Typography className={classes.title} color='initial' variant='h5'>
             Зарегистрироваться
           </Typography>
-          <Link to='/'>
+          <Link to='/show'>
             <CloseIcon />
           </Link>
         </Box>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <TextField
             name='email'
             id='email'
             label='Почта'
             style={{ margin: '15px 8px' }}
             placeholder='example@crm.com'
+            helperText='Обьязательное поле'
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            name='name'
+            id='standard-basic'
+            label='Имя пользователя'
+            style={{ margin: '15px 8px' }}
             helperText='Обьязательное поле'
             fullWidth
             InputLabelProps={{

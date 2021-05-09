@@ -1,19 +1,26 @@
-import { BrowserRouter, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import AuthProvider from './AuthProvider';
-import Auth from './componets/Auth/Auth';
-import SignUp from './componets/Auth/SignUp';
+import AuthContainer from './componets/Auth/AuthContainer';
+import SignUpContainer from './componets/Auth/SignUpContainer';
 import LoginPage from './componets/Login-page/LoginPage';
+import Main from './componets/Main-page/Main';
 import './scss/app.scss'
 
 function App() {
+  const { profile } = useSelector(state => ({
+    profile: state.profile.profile
+  }))
   return (
     <AuthProvider>
       <div className="wrapper">
-      <BrowserRouter>
-        <Route exact path='/' component={LoginPage}/>
-        <Route path='/login' component={Auth} />
-        <Route path='/signup' component={ SignUp }/>
-        </BrowserRouter>
+        <BrowserRouter>
+          { profile ? <Redirect to='/' />:<Redirect to='/show' />}
+        <Route exact path='/' component={Main}/>
+        <Route path='/show' component={LoginPage}/>
+        <Route path='/login' component={AuthContainer} />
+        <Route path='/signup' component={ SignUpContainer }/>
+      </BrowserRouter>
       </div>
     </AuthProvider>
   );
