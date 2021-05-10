@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import crm from '../../assets/CRM.jpg';
+import { useSelector } from 'react-redux';
 
 function LoginPage(props) {
+  const { profile } = useSelector((state) => ({
+    profile: state.profile.profile,
+  }));
+
+  if (profile) {
+    return <Redirect to='/' />;
+  }
   return (
     <div className='login-page'>
       <div className='container'>

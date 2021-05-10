@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 function Auth({ onSubmit, onSubmitWithGoogle }) {
   const classes = useStyles();
   return (
-    <>
+    <div className='login-page'>
       <Card className={classes.root}>
         <CardContent>
           <Box className={classes.close}>
@@ -103,7 +103,7 @@ function Auth({ onSubmit, onSubmitWithGoogle }) {
           Вход с помощью <img src={google} alt='' />
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 }
 
