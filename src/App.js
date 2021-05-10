@@ -12,8 +12,8 @@ function App() {
     <AuthProvider>
       <div className="wrapper">
         <BrowserRouter>
-        <Route exact path='/' component={Main}/>
-        <Route path='/show' component={LoginPage}/>
+        <Route path='/crm' component={Main}/>
+        <Route exact path='/' component={LoginPage}/>
         <Route path='/login' component={AuthContainer} />
         <Route path='/signup' component={ SignUpContainer }/>
       </BrowserRouter>

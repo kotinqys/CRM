@@ -43,7 +43,7 @@ function SignUp({ onSubmit }) {
           <Typography className={classes.title} color='initial' variant='h5'>
             Зарегистрироваться
           </Typography>
-          <Link to='/show'>
+          <Link to='/'>
             <CloseIcon />
           </Link>
         </Box>

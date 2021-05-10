@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, withRouter } from 'react-router';
+import { Redirect, Route, withRouter } from 'react-router';
 import app from '../../firebase';
 import Content from './Content';
 import Header from './Header';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import Contacts from './components/Contacts';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   lists: {
     boxShadow: '5px 4px 10px 0px rgb(0 0 0 / 50%)',
-    height: '93.4%',
+    minHeight: '100%',
     maxWidth: 300,
     backgroundColor: 'white',
   },
@@ -32,12 +34,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const menu = [
-  'Контакты',
-  'Переговоры',
-  'Выставленный счет',
-  'Оплаченный счет',
-  'Успешные продажи',
-  'Неудачные продажи',
+  {
+    val: 'Контакты',
+    url: 'contacts',
+  },
+  {
+    val: 'Переговоры',
+    url: 'conversation',
+  },
+  {
+    val: 'Выставленный счет',
+    url: 'invoice',
+  },
+  {
+    val: 'Оплаченный счет',
+    url: 'paidinvoice',
+  },
+  {
+    val: 'Успешные продажи',
+    url: 'succes',
+  },
+  {
+    val: 'Неудачные продажи',
+    url: 'unsucces',
+  },
 ];
 
 function Main({ history }) {
@@ -62,7 +82,7 @@ function Main({ history }) {
   };
 
   if (!profile) {
-    return <Redirect to='/show' />;
+    return <Redirect to='/' />;
   }
 
   return (
@@ -77,16 +97,18 @@ function Main({ history }) {
           <div className={classes.lists}>
             <List>
               {menu.map((val, index) => (
-                <ListItem
-                  className={activeList === index ? classes.active : classes.list}
-                  onClick={() => setActiveList(index)}>
-                  {val}
-                </ListItem>
+                <Link to={`/crm/${val.url}`}>
+                  <ListItem
+                    className={activeList === index ? classes.active : classes.list}
+                    onClick={() => setActiveList(index)}>
+                    {val.val}
+                  </ListItem>
+                </Link>
               ))}
             </List>
           </div>
         )}
-        <Content />
+        <Route path='/crm/contacts' component={Contacts} />
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ function Auth({ onSubmit, onSubmitWithGoogle }) {
             <Typography className={classes.title} color='initial' variant='h5'>
               Авторизация
             </Typography>
-            <Link to='/show'>
+            <Link to='/'>
               <CloseIcon />
             </Link>
           </Box>

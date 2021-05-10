@@ -10,7 +10,7 @@ function LoginPage(props) {
   }));
 
   if (profile) {
-    return <Redirect to='/' />;
+    return <Redirect to='/crm' />;
   }
   return (
     <div className='login-page'>
@@ -18,16 +18,16 @@ function LoginPage(props) {
         <div className='login-page__header'>
           <div className='login-page__leftside'>
             <div className='login-page__logo'>
-              <Link to='/show'>
+              <Link to='/'>
                 <img src={logo} alt='' />
               </Link>
             </div>
             <div className='login-page__navbar'>
               <nav>
-                <Link>Продукты</Link>
-                <Link>Отзывы</Link>
-                <Link>Кейсы</Link>
-                <Link>Цены</Link>
+                <Link to='/'>Продукты</Link>
+                <Link to='/'>Отзывы</Link>
+                <Link to='/'>Кейсы</Link>
+                <Link to='/'>Цены</Link>
               </nav>
             </div>
           </div>
