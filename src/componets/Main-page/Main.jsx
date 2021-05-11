@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, withRouter } from 'react-router';
 import app from '../../firebase';
-import Content from './Content';
 import Header from './Header';
 import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Drawer, ListItem } from '@material-ui/core';
 import Contacts from './components/Contacts';
+import { Link } from 'react-router-dom';
+
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -31,9 +32,18 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     backgroundColor: '#F1F1F1',
   },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    position: 'fixed',
+    top: 64,
+    width: drawerWidth,
+  },
 }));
 
-const menu = [
+export const menu = [
   {
     val: 'Контакты',
     url: 'contacts',
@@ -64,8 +74,8 @@ function Main({ history }) {
   const { profile } = useSelector((state) => ({
     profile: state.profile.profile,
   }));
-  const [menuVisible, setMenuVisible] = useState(true);
   const [activeList, setActiveList] = useState(0);
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   const handleLogout = async () => {
@@ -78,7 +88,7 @@ function Main({ history }) {
   };
 
   const handleOpenMenu = () => {
-    setMenuVisible(!menuVisible);
+    setOpen(!open);
   };
 
   if (!profile) {
@@ -93,21 +103,24 @@ function Main({ history }) {
         handleOpenMenu={handleOpenMenu}
       />
       <div style={{ display: 'flex' }}>
-        {menuVisible && (
-          <div className={classes.lists}>
-            <List>
-              {menu.map((val, index) => (
-                <Link to={`/crm/${val.url}`}>
-                  <ListItem
-                    className={activeList === index ? classes.active : classes.list}
-                    onClick={() => setActiveList(index)}>
-                    {val.val}
-                  </ListItem>
-                </Link>
-              ))}
-            </List>
-          </div>
-        )}
+        <Drawer
+          className={open ? classes.drawer : ''}
+          variant='persistent'
+          anchor='left'
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}>
+          {menu.map((val, index) => (
+            <Link to={`/crm/${val.url}`}>
+              <ListItem
+                className={activeList === index ? classes.active : classes.list}
+                onClick={() => setActiveList(index)}>
+                {val.val}
+              </ListItem>
+            </Link>
+          ))}
+        </Drawer>
         <Route path='/crm/contacts' component={Contacts} />
       </div>
     </div>
