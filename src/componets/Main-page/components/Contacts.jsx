@@ -1,24 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 import CardsContainer from './CardsContainer';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCards } from '../../../redux/actions/cards';
 
-function Contacts(props) {
-  const dispatch = useDispatch();
-  const { cards } = useSelector((state) => ({
-    cards: state.cards.cards,
-  }));
-
-  useEffect(() => {
-    dispatch(getCards());
-  }, []);
-
+function Contacts({ title, cards }) {
   return (
     <div className='content'>
       <Container maxWidth='xl'>
         <Typography variant='h5' className='content__title'>
-          Контакты
+          {title}
         </Typography>
         <hr className='hr' />
         <CardsContainer cards={cards} />

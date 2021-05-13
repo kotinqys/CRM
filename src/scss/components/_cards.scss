@@ -5,16 +5,13 @@
 .card{
     height: 55px;
     margin-top: 10px;
-    &__body{
-        background-color: #7e7e7e;
-        display: flex;
-        justify-content: space-between;
-    }
     &__about{
         display: flex;
         justify-content: space-between;
     }
     &__name{
+        width: 200px;
+        text-align: center;
         color:white;
         font-size: 18px;
         padding-right: 20px;
@@ -50,4 +47,35 @@
             }
         }
     }
+    .contacts {
+        display: flex;
+        justify-content: space-between;
+        background-color: #8B8B8B;
+    }
+    .conversation {
+        display: flex;
+        justify-content: space-between;
+        background-color: #E3A503;
+    }
+    .invoice {
+        display: flex;
+        justify-content: space-between;
+        background-color: #EB9F45;
+    }
+    .paidinvoice {
+        display: flex;
+        justify-content: space-between;
+        background-color: #75A70A;
+    }
+    .succes {
+        display: flex;
+        justify-content: space-between;
+        background-color: #499D07;
+    }
+    .unsucces {
+        display: flex;
+        justify-content: space-between;
+        background-color: #ED5151;
+    }
+
 }

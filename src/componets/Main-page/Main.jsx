@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect, Route, withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, withRouter } from 'react-router';
 import app from '../../firebase';
 import Header from './Header';
 import { makeStyles } from '@material-ui/core/styles';
 import { Drawer, ListItem } from '@material-ui/core';
-import Contacts from './components/Contacts';
 import { Link } from 'react-router-dom';
+import CardsRouter from './CardsRouter';
+import AddCart from './AddCart';
 
 const drawerWidth = 300;
 
@@ -87,6 +88,8 @@ function Main({ history }) {
     }
   };
 
+  const setCart = () => {};
+
   const handleOpenMenu = () => {
     setOpen(!open);
   };
@@ -112,7 +115,7 @@ function Main({ history }) {
             paper: classes.drawerPaper,
           }}>
           {menu.map((val, index) => (
-            <Link to={`/crm/${val.url}`}>
+            <Link key={(index, val.url)} to={`/crm/${val.url}`}>
               <ListItem
                 className={activeList === index ? classes.active : classes.list}
                 onClick={() => setActiveList(index)}>
@@ -121,8 +124,9 @@ function Main({ history }) {
             </Link>
           ))}
         </Drawer>
-        <Route path='/crm/contacts' component={Contacts} />
+        <CardsRouter />
       </div>
+      <AddCart setCart={setCart} />
     </div>
   );
 }

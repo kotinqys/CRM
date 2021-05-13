@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -11,9 +11,9 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Link } from 'react-router-dom';
 import { menu } from '../Main';
 
-function Cards({ card, handleChange }) {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+function Cards({ card, onUpdateCard }) {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
     setOpen(!open);
@@ -25,8 +25,8 @@ function Cards({ card, handleChange }) {
 
   return (
     <>
-      <Card className='card'>
-        <CardContent className='card__body'>
+      <Card className={'card'}>
+        <CardContent className={card.category}>
           <div className='card__about'>
             <div className='card__name'>{card.fullName}</div>
             <p>телефон : {card.number}</p>
@@ -36,7 +36,8 @@ function Cards({ card, handleChange }) {
             </p>
           </div>
           <p className='card__category' ref={anchorRef} onClick={handleToggle}>
-            категория : {card.category} <ArrowDropDownIcon />
+            категория : {menu.map((val) => val.url === card.category && val.val)}{' '}
+            <ArrowDropDownIcon />
           </p>
           <Popper
             className='popper'
@@ -49,7 +50,14 @@ function Cards({ card, handleChange }) {
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id='menu-list-grow'>
                   {menu.map((val, index) => (
-                    <MenuItem onClick={() => handleChange(card)}>{val.val}</MenuItem>
+                    <MenuItem
+                      key={val + index}
+                      onClick={() => {
+                        onUpdateCard(card, val.val);
+                        setOpen(!open);
+                      }}>
+                      {val.val}
+                    </MenuItem>
                   ))}
                 </MenuList>
               </ClickAwayListener>

@@ -20,3 +20,17 @@ export const getCards = () => {
             });
         }
 }
+
+export const updateCard = (card, val) => {
+    return dispatch => {
+    let data = app.firestore().collection('cards').doc(`${card.id}`);
+    return data
+      .update({ category: val })
+      .then(() => {
+        dispatch(getCards());
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    }
+}
