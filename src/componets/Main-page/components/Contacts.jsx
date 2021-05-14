@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 import CardsContainer from './CardsContainer';
+import Loader from './Loader';
 
-function Contacts({ title, cards }) {
+function Contacts({ title, cards, loading }) {
   return (
     <div className='content'>
       <Container maxWidth='xl'>
@@ -10,7 +11,7 @@ function Contacts({ title, cards }) {
           {title}
         </Typography>
         <hr className='hr' />
-        <CardsContainer cards={cards} />
+        {loading ? <Loader /> : <CardsContainer cards={cards} />}
       </Container>
     </div>
   );

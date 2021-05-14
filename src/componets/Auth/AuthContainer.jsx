@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Auth from './Auth';
 import { useDispatch } from 'react-redux';
@@ -7,12 +7,18 @@ import { withRouter } from 'react-router';
 
 function AuthContainer({ history }) {
   const dispatch = useDispatch();
+  const [error, setError] = useState(false);
 
   //Вход через логин, пароль
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
-    dispatch(login(email, password, history));
+    try {
+      dispatch(login(email, password));
+      history.push('/');
+    } catch (error) {
+      setError(true);
+    }
   };
 
   //Вход через Google
@@ -20,7 +26,7 @@ function AuthContainer({ history }) {
     dispatch(loginWithGoogle(history));
   };
 
-  return <Auth onSubmit={handleSubmit} onSubmitWithGoogle={handleSubmitwithGoogle} />;
+  return <Auth onSubmit={handleSubmit} onSubmitWithGoogle={handleSubmitwithGoogle} error={error} />;
 }
 
 export default withRouter(AuthContainer);

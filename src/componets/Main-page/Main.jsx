@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect, withRouter } from 'react-router';
 import app from '../../firebase';
 import Header from './Header';
@@ -88,8 +88,6 @@ function Main({ history }) {
     }
   };
 
-  const setCart = () => {};
-
   const handleOpenMenu = () => {
     setOpen(!open);
   };
@@ -126,7 +124,7 @@ function Main({ history }) {
         </Drawer>
         <CardsRouter />
       </div>
-      <AddCart setCart={setCart} />
+      <AddCart />
     </div>
   );
 }

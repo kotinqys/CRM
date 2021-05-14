@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Auth({ onSubmit, onSubmitWithGoogle }) {
+function Auth({ onSubmit, onSubmitWithGoogle, error }) {
   const classes = useStyles();
   return (
     <div className='login-page'>
@@ -56,6 +56,7 @@ function Auth({ onSubmit, onSubmitWithGoogle }) {
             <TextField
               name='email'
               id='email'
+              error={error}
               label='Почта'
               style={{ margin: '15px 8px' }}
               placeholder='example@crm.com'
@@ -68,6 +69,7 @@ function Auth({ onSubmit, onSubmitWithGoogle }) {
             <TextField
               name='password'
               id='password'
+              error={error}
               label='Пароль'
               type='password'
               style={{ margin: '15px 8px' }}

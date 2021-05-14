@@ -1,7 +1,8 @@
 import produce from "immer"
 
 const initialState = {
-    cards:[]
+    cards: [],
+    loading:false
 }
 
 const cards = (state = initialState, action) => {
@@ -9,6 +10,9 @@ const cards = (state = initialState, action) => {
         switch (action.type) {
             case 'SET_CARDS':
                 draft.cards = action.data
+                break
+            case 'SET_LOADING':
+                draft.loading = action.loading
                 break
             default:
                 return state

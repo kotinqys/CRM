@@ -6,18 +6,13 @@ export const setProfile= (profile) => ({
     profile
 });
 
-export const login = (email,password,history) => {
+export const login = (email,password) => {
     return async dispatch => {
-        try {
         //Отправка запрос на firebase для подтверждения аккаунта
         await app.auth().signInWithEmailAndPassword(email.value, password.value);
         const user = app.auth().currentUser;
 
         dispatch(setProfile(user));
-        history.push('/');
-        } catch (error) {
-        alert(error);
-        }
     }
 }
 

@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
     profile,
-    cards
+    cards,
 })
 
 const store = createStore(reducers,composeWithDevTools(applyMiddleware(thunk)))
