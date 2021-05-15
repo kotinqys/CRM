@@ -76,7 +76,6 @@ export default function Header({ displayName, handleLogout, handleOpenMenu }) {
               }}
               open={open}
               onClose={handleClose}>
-              <MenuItem onClick={handleClose}>Мой профиль</MenuItem>
               <MenuItem onClick={handleLogout}>Выйти</MenuItem>
             </Menu>
           </div>

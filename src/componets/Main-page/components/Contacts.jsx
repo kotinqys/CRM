@@ -11,7 +11,13 @@ function Contacts({ title, cards, loading }) {
           {title}
         </Typography>
         <hr className='hr' />
-        {loading ? <Loader /> : <CardsContainer cards={cards} />}
+        {cards.length < 1 ? (
+          <h2 className='content__empty'>Нету контаков в этом отделе</h2>
+        ) : loading ? (
+          <Loader />
+        ) : (
+          <CardsContainer cards={cards} />
+        )}
       </Container>
     </div>
   );

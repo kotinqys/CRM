@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
-import app from '../../../firebase';
 import { createCard } from '../../../redux/actions/cards';
 import CreateCard from './CreateCard';
 
